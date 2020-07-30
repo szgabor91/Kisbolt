@@ -39,41 +39,9 @@ namespace Kisbolt.Modellek
             }
         }
 
-        protected Cegadatok Bejelentkezes(string felh, string jelsz)
+        public MySqlConnection GetConn()
         {
-            jelsz = Sha512hash.GetHash(jelsz);
-            /*
-            string sql = "SELECT * FROM felhasznalo_adatok " + 
-                "WHERE FelhNev = @FelhNev AND Jelszo = @Jelszo ";
-            */
-            string sql = "SELECT felhasznalo_adatok.*, vevotipusok.VevoTipusNev " +
-                "FROM felhasznalo_adatok " +
-                "INNER JOIN vevotipusok " +
-                "ON felhasznalo_adatok.VevoTipusID = vevotipusok.VevoTipusID " +
-                "WHERE FelhNev = @FelhNev AND Jelszo = @Jelszo ";
-            Cegadatok cegadatok = new Cegadatok("", "", "", "");
-
-           
-
-            using (MySqlCommand cmd = new MySqlCommand(sql, conn))
-            {
-                cmd.Parameters.AddWithValue("@FelhNev", felh);
-                cmd.Parameters.AddWithValue("@Jelszo", jelsz);
-
-                using (MySqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while(reader.Read())
-                    {
-                        
-                        cegadatok.adoszam = reader["Adoszam"].ToString();
-                        cegadatok.cegnev = reader["Cegnev"].ToString();
-                        cegadatok.felhNev = reader["FelhNev"].ToString();
-                        cegadatok.cegTipus = reader["VevoTipusNev"].ToString();
-                    }
-                }
-            }
-
-            return cegadatok;
+            return conn;
         }
 
         protected void KategoriaFelvitel(TermekKategoria kategoria)
@@ -702,32 +670,6 @@ namespace Kisbolt.Modellek
                 cmd.Parameters.AddWithValue("@VasarlasID", vasarlasID);
                 cmd.ExecuteNonQuery();
             }
-        }
-
-        public Cegadatok FelhasznaloAdatok()
-        {
-            Cegadatok cegadatok = new Cegadatok("","","","");
-
-            string sql = "SELECT felhasznalo_adatok.*, vevotipusok.VevoTipusNev " +
-                "WHERE felhasznalo_adatok.FelhID = 1 ";
-
-            using (MySqlCommand cmd = new MySqlCommand(sql, conn))
-            {
-                using (MySqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while(reader.Read())
-                    {
-                        cegadatok.adoszam = reader["Adoszam"].ToString();
-                        cegadatok.cegnev = reader["Cegnev"].ToString();
-                        cegadatok.felhNev = reader["FelhNev"].ToString();
-                        cegadatok.cegTipus = reader["VevoTipusNev"].ToString();
-
-
-                    }
-                }
-            }
-
-                return cegadatok;
         }
     }
 }

@@ -25,9 +25,9 @@ namespace Kisbolt
 
         private void termékkategóriaFelviteleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!FelhasznaloKezelo.Elfogadva)
+            if (!FelhasznaloKezelo.Autentikalt())
             {
-                MessageBox.Show("A megnüpont megnyitásához be kell lépnie!");
+                MessageBox.Show("A menüpont megnyitásához be kell lépnie!");
                 return;
             }
 
@@ -37,9 +37,9 @@ namespace Kisbolt
 
         private void raktárKezeléseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!FelhasznaloKezelo.Elfogadva)
+            if (!FelhasznaloKezelo.Autentikalt())
             {
-                MessageBox.Show("A megnüpont megnyitásához be kell lépnie!");
+                MessageBox.Show("A menüpont megnyitásához be kell lépnie!");
                 return;
 
             }
@@ -50,9 +50,9 @@ namespace Kisbolt
 
         private void termékFelviteleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!FelhasznaloKezelo.Elfogadva)
+            if (!FelhasznaloKezelo.Autentikalt())
             {
-                MessageBox.Show("A megnüpont megnyitásához be kell lépnie!");
+                MessageBox.Show("A menüpont megnyitásához be kell lépnie!");
                 return;
 
             }
@@ -63,9 +63,9 @@ namespace Kisbolt
 
         private void vásárlásFelviteleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!FelhasznaloKezelo.Elfogadva)
+            if (!FelhasznaloKezelo.Autentikalt())
             {
-                MessageBox.Show("A megnüpont megnyitásához be kell lépnie!");
+                MessageBox.Show("A menüpont megnyitásához be kell lépnie!");
                 return;
 
             }
@@ -76,9 +76,9 @@ namespace Kisbolt
 
         private void vevőkFelviteleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!FelhasznaloKezelo.Elfogadva)
+            if (!FelhasznaloKezelo.Autentikalt())
             {
-                MessageBox.Show("A megnüpont megnyitásához be kell lépnie!");
+                MessageBox.Show("A menüpont megnyitásához be kell lépnie!");
                 return;
 
             }
@@ -89,9 +89,9 @@ namespace Kisbolt
 
         private void korábbiVásárlásokToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!FelhasznaloKezelo.Elfogadva)
+            if (!FelhasznaloKezelo.Autentikalt())
             {
-                MessageBox.Show("A megnüpont megnyitásához be kell lépnie!");
+                MessageBox.Show("A menüpont megnyitásához be kell lépnie!");
                 return;
 
             }
@@ -104,13 +104,13 @@ namespace Kisbolt
         {
             try
             {
-                Cegadatok cegadatok = fk.Beleptetes(felhNevTxt.Text, jelszoTxt.Text);
+                Cegadatok cegadatok = FelhasznaloKezelo.Beleptetes(ab, felhNevTxt.Text, jelszoTxt.Text);
                 MessageBox.Show("Sikeres azonosítás!");
-                felhNevTxt.Text = cegadatok.felhNev;
+                felhNevTxt.Text = cegadatok.GetFelhNev();
                 felhNevTxt.Enabled = false;
                 felhNevTxt.TextAlign = HorizontalAlignment.Center;
                 jelszoLabel.Text = "Cégnév";
-                jelszoTxt.Text = cegadatok.cegnev + " " + cegadatok.cegTipus;
+                jelszoTxt.Text = cegadatok.GetCegnev() + " " + cegadatok.GetTipus();
                 jelszoTxt.TextAlign = HorizontalAlignment.Center;                
                 jelszoTxt.Enabled = false;
                 jelszoTxt.PasswordChar = '\0';
