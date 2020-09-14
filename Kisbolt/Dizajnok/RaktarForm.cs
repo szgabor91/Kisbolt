@@ -59,7 +59,7 @@ namespace Kisbolt
                 lwi.SubItems.Add(raktar.termek.termekNev);
                 lwi.SubItems.Add($"{raktar.mennyiseg} {raktar.termek.egyseg}");
                 lwi.SubItems.Add(raktar.beszerzesiAr + " Ft.");
-                lwi.SubItems.Add(raktar.beszerzesiIdopont.ToString("yyyy-mm-dd hh:mm:ss"));
+                lwi.SubItems.Add(raktar.beszerzesiIdopont.ToString("yyyy-MM-dd hh:mm:ss"));
 
                 raktarListView.Items.Add(lwi);
             }
